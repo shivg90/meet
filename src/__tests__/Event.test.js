@@ -40,7 +40,7 @@ describe('<Event /> componenent', () => {
 
     // Test 5: checks the button is collapsed by default
     test('renders collapsed by default', () => {
-        expect(EventWrapper.state("collapsed")).toBe(true);
+        expect(EventWrapper.state('collapsed')).toBe(true);
     });
 
     // test 7: renders collapsed view
