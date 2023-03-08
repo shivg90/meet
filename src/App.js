@@ -15,13 +15,13 @@ class App extends Component {
     locations: [],
     seletedLocation: 'all',
     numberOfEvents: 32
-  }
+  };
 
   componentDidMount() {
     this.mounted = true;
     getEvents().then((events) => {
       if (this.mounted) {
-        this.setState({ events: events.slice(0, this.state.numberOfEvents),  locations: extractLocations(events) });
+        this.setState({ events: events.slice(0, this.state.numberOfEvents),  locations: extractLocations(events) }); //CHECK
       }
     });
   }
@@ -39,17 +39,17 @@ class App extends Component {
 
 
   updateEvents = (location, inputNumber) => {
-    const { numberOfEvents, seletedLocation } = this.state;
+    const { eventCount, seletedLocation } = this.state;
     if (location) {
       getEvents().then((events) => {
         const locationEvents = (location === 'all') ?
           events :
           events.filter((event) => event.location === location);
-        const eventsToShow = locationEvents.slice(0, numberOfEvents);
+        const eventsToShow = locationEvents.slice(0, eventCount);
         this.setState({
           events: eventsToShow,
           seletedLocation: location,
-          numberOfEvents: this.state.numberOfEvents
+          numberOfEvents: this.state.numberOfEvents //remove?
         });
       });
     } else {
@@ -60,7 +60,7 @@ class App extends Component {
         const eventsToShow = locationEvents.slice(0, inputNumber);
         this.setState({
           events: eventsToShow,
-          numberOfEvents: inputNumber
+          numberOfEvents: inputNumber //change to evenCount?
         });
       })
     }

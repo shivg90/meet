@@ -5,7 +5,7 @@ import NumberOfEvents from "../NumberOfEvents";
 describe("<NumberOfEvents /> component", () => {
     let NumberOfEventsWrapper;
     beforeAll(() => {
-        NumberOfEventsWrapper = shallow(<NumberOfEvents updateEvents={() => {}}/>); //was updateNumberOfEvents
+        NumberOfEventsWrapper = shallow(<NumberOfEvents updateNumberOfEvents={() => {}} updateEvents={() => {}}/>); 
     });
 
     // test 1: checks the basic component is rendered
@@ -15,6 +15,7 @@ describe("<NumberOfEvents /> component", () => {
 
     // test 2: the default number of events shown is 32
     test('user sees 32 events by default', () => {
+        expect(NumberOfEventsWrapper.find('input.number').prop('type')).toBe('number');
         expect(NumberOfEventsWrapper.state('number')).toBe(32);
     })
 
@@ -26,20 +27,14 @@ describe("<NumberOfEvents /> component", () => {
 
     // test 4: the component changes state when user inputs value (10)
     test('change state when user input changes', () => {
-        NumberOfEventsWrapper.setState({
-            number: '32'
+        expect(NumberOfEventsWrapper.state('number')).toBe(32);
+        NumberOfEventsWrapper.find('input.number').simulate('change', {
+        target: { value: 12 },
         });
-        const eventNumber = { target: { value: '10' } };
-        NumberOfEventsWrapper.find('.number').simulate('change', eventNumber);
-        expect(NumberOfEventsWrapper.state('number')).toBe('10');
+        expect(NumberOfEventsWrapper.state('number')).toBe(12);
     });
 
-    /*test("the input should have the value given in the num prop", () => {
-        const NumberOfEventsWrapperWithProp = shallow(<NumberOfEvents number={18} updateNumberOfEvents={() => {}} />);
-        expect(NumberOfEventsWrapperWithProp.state("numberOfEvents")).toBe(18);
-    }); */
-
-    /*// test 5: the results of the user input is rendered correctly --take out?
+    /* // test 5: the results of the user input is rendered correctly --take out?
     test('rendered number of events is equal to the users input', () => {
         const RenderedNumberOfEvents = shallow(
             <NumberOfEvents number={10} updateEvents={() => { }} /> //was updateNumberOfEvents
