@@ -5,7 +5,7 @@ import NumberOfEvents from "../NumberOfEvents";
 describe("<NumberOfEvents /> component", () => {
     let NumberOfEventsWrapper;
     beforeAll(() => {
-        NumberOfEventsWrapper = shallow(<NumberOfEvents updateNumberOfEvents={() => {}}/>);
+        NumberOfEventsWrapper = shallow(<NumberOfEvents updateEvents={() => {}}/>); //was updateNumberOfEvents
     });
 
     // test 1: checks the basic component is rendered
@@ -34,13 +34,18 @@ describe("<NumberOfEvents /> component", () => {
         expect(NumberOfEventsWrapper.state('number')).toBe('10');
     });
 
-    // test 5: the results of the user input is rendered correctly
+    /*test("the input should have the value given in the num prop", () => {
+        const NumberOfEventsWrapperWithProp = shallow(<NumberOfEvents number={18} updateNumberOfEvents={() => {}} />);
+        expect(NumberOfEventsWrapperWithProp.state("numberOfEvents")).toBe(18);
+    }); */
+
+    /*// test 5: the results of the user input is rendered correctly --take out?
     test('rendered number of events is equal to the users input', () => {
         const RenderedNumberOfEvents = shallow(
-            <NumberOfEvents number={10} updateNumberOfEvents={() => { }} />
+            <NumberOfEvents number={10} updateEvents={() => { }} /> //was updateNumberOfEvents
         );
         expect(RenderedNumberOfEvents.state('number')).toBe(10);
-    });
+    }); */
 
 });
 
