@@ -84,19 +84,6 @@ describe('<App /> integration', () => {
     AppWrapper.unmount();
   }); 
 
-  /* not passing!
-    test('apps state changes in line with input for NumberOfEvents', async () => {
-    const AppWrapper = mount(<App />);
-    const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
-    const inputField = NumberOfEventsWrapper.find('input.number');
-    const eventObject={target: {value: 20}};
-    inputField.simulate('change', eventObject);
-    await getEvents();
-    expect(AppWrapper.state('numberOfEvents')).toBe(20);
-    expect(NumberOfEventsWrapper.state('numberOfEvents')).toBe(20);
-    AppWrapper.unmount();
-}); */
-
   test('Filtered list of events matches mock data', async () => {
     const AppWrapper = mount(<App />);
     const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
