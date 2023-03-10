@@ -36,8 +36,6 @@ class App extends Component {
     })
   }
 
-
-
   updateEvents = (location, inputNumber) => {
     const { eventCount, seletedLocation } = this.state;
     if (location) {
@@ -79,9 +77,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <h1>Meet Up</h1>
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents}/>
-        <EventList events={this.state.events} /> 
         <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents}/>
+        <EventList events={this.state.events} /> 
       </div>
     );
   }

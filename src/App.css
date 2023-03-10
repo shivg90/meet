@@ -8,6 +8,17 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: #92a8d1;
+  color: #034f84;
+}
+
+h1 {
+  color: #a55353;
+  font-size: 45px;
+
+}
+
 ul {
   padding: 0;
   list-style: none;
@@ -38,6 +49,7 @@ input[type="number"] {
 
 .city {
   width: 250px;
+  
 }
 
 .CitySearch {
@@ -47,6 +59,11 @@ input[type="number"] {
   max-width: 300px;
   margin: auto;
   position: relative;
+  padding-bottom: 30px;
+}
+
+.NumberOfEvents {
+  padding-bottom: 30px;
 }
 
 .suggestions {
@@ -80,9 +97,10 @@ input[type="number"] {
   padding: 10px 10px 35px;
   margin-bottom: 10px;
   text-align: left;
-  border: 1px solid #ccc;
+  border: 1px solid #034f84;
   border-radius: 4px;
   position: relative;
+  
 }
 
 .details-btn {
@@ -93,6 +111,8 @@ input[type="number"] {
   border-radius: 4px;
   outline: none;
   cursor: pointer;
+  background-color: #a55353;
+  color: white;
 }
 
 .name {
@@ -118,6 +138,8 @@ input[type="number"] {
   width: 200px;
   margin: 20px auto;
   text-align: center;
+  
+  
 }
 
 .button-wrapper {
