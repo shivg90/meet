@@ -42,10 +42,15 @@ class CitySearch extends Component {
     this.props.updateEvents(suggestion);
   }
 
+  handleBlur = () => { // suggestion list disappears if user clicks away from city search box
+    this.setState({ showSuggestions: false });
+  }
+
   render() {
     return (
       
       <div className="CitySearch">
+        <div>
         <h3>choose a city:</h3>
         <input
         type="text"
@@ -53,7 +58,9 @@ class CitySearch extends Component {
         value={this.state.query}
         onChange={this.handleInputChanged}
         onFocus={() => { this.setState({ showSuggestions: true }) }}
+        onBlur={this.handleBlur}
         />
+        </div>
         <ul className="suggestions" style={this.state.showSuggestions ? {}: { display: 'none' }}>
           {this.state.suggestions.map((suggestion) => (
             <li key={suggestion} onClick={() => this.handleItemClicked(suggestion)} >{suggestion}</li>
