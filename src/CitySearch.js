@@ -8,7 +8,8 @@ class CitySearch extends Component {
   state = {
     query: '',
     suggestions: [],
-    showSuggestions: undefined  
+    showSuggestions: undefined,
+    infoText: ''
   }
 
   handleInputChanged = (event) => {
@@ -37,7 +38,7 @@ class CitySearch extends Component {
       query: suggestion,
       suggestions: [],
       showSuggestions: false,
-      infoText:'' //check
+      infoText:'' 
     });
     this.props.updateEvents(suggestion);
   }
@@ -63,9 +64,9 @@ class CitySearch extends Component {
         </div>
         <ul className="suggestions" style={this.state.showSuggestions ? {}: { display: 'none' }}>
           {this.state.suggestions.map((suggestion) => (
-            <li key={suggestion} onClick={() => this.handleItemClicked(suggestion)} >{suggestion}</li>
+            <li key={suggestion} onMouseDown={() => this.handleItemClicked(suggestion)} >{suggestion}</li>
         ))}
-        <li onClick={() => this.handleItemClicked("all")}>
+        <li key="all" onMouseDown={() => this.handleItemClicked("all")}>
             <b>See all cities</b>
         </li>
         </ul>
