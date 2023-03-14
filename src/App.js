@@ -47,7 +47,7 @@ class App extends Component {
         this.setState({
           events: eventsToShow,
           seletedLocation: location,
-          numberOfEvents: this.state.numberOfEvents //remove?
+          numberOfEvents: this.state.numberOfEvents 
         });
       });
     } else {
@@ -58,21 +58,11 @@ class App extends Component {
         const eventsToShow = locationEvents.slice(0, inputNumber);
         this.setState({
           events: eventsToShow,
-          numberOfEvents: inputNumber //change to evenCount?
+          numberOfEvents: inputNumber 
         });
       })
     }
   }
-
-  /*getData = () => {
-    const {locations, events} = this.state;
-    const data = locations.map((location)=>{
-      const number = events.filter((event) => event.location === location).length;
-      const city = location.split(', ').shift();
-      return {city, number};
-    })
-    return data;
-  }; */
 
   render() {
     return (

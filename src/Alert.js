@@ -9,12 +9,14 @@ class Alert extends Component {
   getStyle = () => {
     return {
       color: this.color,
+      textAlign: 'center'
+     
     };
   }
 
   render() {
     return (
-      <div className="Alert">
+      <div className="Alert" style={{ textAlign: 'center' }}>
         <p style={this.getStyle()}>{this.props.text}</p>
       </div>
     );
@@ -25,6 +27,7 @@ class InfoAlert extends Alert {
     constructor(props) {
       super(props);
       this.color = 'blue';
+      
     }
   }
 

@@ -152,7 +152,6 @@ input[type="number"] {
 }
 
 .Alert {
-  position: fixed;
   top: 20px;
 }
 
