@@ -63,6 +63,13 @@ export const getEvents = async () => {
     return mockData;
    }
 
+   // returns cached user data when app is offline
+   if (!navigator.onLine) {
+    const data = localStorage.getItem("lastEvents");
+    NProgress.done();
+    return data?JSON.parse(data).events:[];;
+  }
+
    const token = await getAccessToken();
 
   if (token) {
