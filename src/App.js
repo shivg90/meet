@@ -3,6 +3,7 @@ import './App.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
+import { WarningAlert } from './Alert';
 import { getEvents, extractLocations } from './api';
 import './nprogress.css';
 
@@ -65,11 +66,16 @@ class App extends Component {
   }
 
   render() {
+    const offlineMessage = navigator.onLine
+      ? ''
+      : 'The app has no connection to the internet. The information displayed may not be up-to-date.';
+
     return (
       <div className="App">
         <h1>Meet Up</h1>
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents}/>
         <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents}/>
+        <WarningAlert text={offlineMessage}></WarningAlert>
         <EventList events={this.state.events} /> 
       </div>
     );
