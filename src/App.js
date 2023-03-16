@@ -7,6 +7,7 @@ import { WarningAlert } from './Alert';
 import { getEvents, extractLocations, checkToken, getAccessToken } from './api';
 import './nprogress.css';
 import WelcomeScreen from './WelcomeScreen';
+import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 //state is passed as a prop of events in EventList
 //state is passed as a prop of locations in CitySearch
@@ -18,6 +19,17 @@ class App extends Component {
     seletedLocation: 'all',
     numberOfEvents: 32,
     showWelcomeScreen: undefined
+  };
+
+  // API data for charts
+  getData = () => {
+    const {locations, events} = this.state;
+    const data = locations.map((location)=>{
+      const number = events.filter((event) => event.location === location).length
+      const city = location.split(', ').shift()
+      return {city, number};
+    })
+    return data;
   };
 
   async componentDidMount() {
@@ -84,10 +96,22 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h1>Meet Up</h1>
-        <CitySearch locations={this.state.locations} updateEvents={this.updateEvents}/>
-        <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents}/>
-        <WarningAlert text={offlineMessage}></WarningAlert>
+        <div>
+          <h1>Meet Up</h1>
+          <CitySearch locations={this.state.locations} updateEvents={this.updateEvents}/>
+          <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents}/>
+          <WarningAlert text={offlineMessage}></WarningAlert>
+        </div>
+        <h4>Events in each city</h4>
+        <ResponsiveContainer height={400} >
+          <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }} >
+          <CartesianGrid />
+          <XAxis type="category" dataKey="city" name="city" />
+          <YAxis type="number" dataKey="number" name="number of events" allowDecimals={false} />
+          <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+          <Scatter data={this.getData()} fill="#8884d8" />
+          </ScatterChart>
+        </ResponsiveContainer>
         <EventList events={this.state.events} /> 
         <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
       </div>
