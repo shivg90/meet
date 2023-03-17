@@ -16,7 +16,7 @@ class App extends Component {
   state = {
     events: [],
     locations: [],
-    seletedLocation: 'all',
+    selectedLocation: 'all',
     numberOfEvents: 32,
     showWelcomeScreen: undefined
   };
@@ -59,24 +59,24 @@ class App extends Component {
   }
 
   updateEvents = (location, inputNumber) => {
-    const { eventCount, seletedLocation } = this.state;
+    const { selectedLocation } = this.state;
     if (location) {
       getEvents().then((events) => {
         const locationEvents = (location === 'all') ?
           events :
           events.filter((event) => event.location === location);
-        const eventsToShow = locationEvents.slice(0, eventCount);
+        const eventsToShow = locationEvents.slice(0, inputNumber);
         this.setState({
           events: eventsToShow,
-          seletedLocation: location,
-          numberOfEvents: this.state.numberOfEvents 
+          selectedLocation: location,
+          numberOfEvents: inputNumber
         });
       });
     } else {
       getEvents().then((events) => {
-        const locationEvents = (seletedLocation === 'all') ?
+        const locationEvents = (selectedLocation === 'all') ?
           events :
-          events.filter((event) => event.location === seletedLocation);
+          events.filter((event) => event.location === selectedLocation);
         const eventsToShow = locationEvents.slice(0, inputNumber);
         this.setState({
           events: eventsToShow,
@@ -114,9 +114,14 @@ class App extends Component {
         </ResponsiveContainer>
         <EventList events={this.state.events} /> 
         <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
+        
       </div>
     );
   }
 }
 
+
+/* removing from last line of code whilst testing locally
+<WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
+*/
 export default App;
