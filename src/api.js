@@ -23,7 +23,6 @@ export const checkToken = async (accessToken) => {
     )
       .then((res) => res.json())
       .catch((error) => error.json());
-  
     return result;
   };
   
@@ -67,10 +66,10 @@ export const getEvents = async () => {
    if (!navigator.onLine) {
     const data = localStorage.getItem("lastEvents");
     NProgress.done();
-    return data ? JSON.parse(data).events:[];
+    return data?JSON.parse(data).events : [];
   }
 
-   const token = await getAccessToken();
+  const token = await getAccessToken();
 
   if (token) {
     removeQuery();
