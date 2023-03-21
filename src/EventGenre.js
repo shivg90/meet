@@ -44,4 +44,4 @@ const EventGenre = ({ events }) => {
 
     }
 
-    export default EventGenre;
+export default EventGenre;

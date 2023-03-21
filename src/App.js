@@ -8,7 +8,7 @@ import { getEvents, extractLocations, checkToken, getAccessToken } from './api';
 import './nprogress.css';
 import WelcomeScreen from './WelcomeScreen';
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { EventGenre } from './EventGenre';
+import EventGenre from './EventGenre';
 
 //state is passed as a prop of events in EventList
 //state is passed as a prop of locations in CitySearch
