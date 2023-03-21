@@ -8,8 +8,8 @@ const EventGenre = ({ events }) => {
     const getData = useCallback(() => {
         const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'AngularJS'];
         const data = genres.map((genre) => {
-            const value = events.filter(({ event }) =>
-                event.summary.split(' ').includes(genre)
+            const value = events.filter(({ summary }) =>
+                summary.split(' ').includes(genre)
                 ).length;
                 return { name: genre, value };
             });
