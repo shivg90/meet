@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
 const EventGenre = ({ events }) => {
     const [data, setData] = useState([]);
     const colors = ["#ffffff", "#eddcdc", "#dbbaba", "#c99797", "#b77575"];
     
-    const getData = () => {
+    const getData = useCallback(() => {
         const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'AngularJS'];
         const data = genres.map((genre) => {
             const value = events.filter(({ event }) =>
@@ -14,11 +14,11 @@ const EventGenre = ({ events }) => {
                 return { name: genre, value };
             });
             return data;
-    };
+    }, [events]);
 
     useEffect(() => {
         setData(() => getData());
-    }, [events]);
+    }, [events, getData]);
 
 
 
