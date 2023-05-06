@@ -22,17 +22,6 @@ class App extends Component {
     showWelcomeScreen: undefined
   };
 
-  // API data for charts
-  getData = () => {
-    const {locations, events} = this.state;
-    const data = locations.map((location)=>{
-      const number = events.filter((event) => event.location === location).length
-      const city = location.split(', ').shift()
-      return {city, number};
-    })
-    return data;
-  };
-
   async componentDidMount() {
     this.mounted = true;
     // so I can view changes on localhost 
@@ -44,7 +33,13 @@ class App extends Component {
       });
     }
 
-    const accessToken = localStorage.getItem('access_token');
+  getEvents().then((events) => {
+    if (this.mounted) {
+      this.setState({ events, locations: extractLocations(events) });
+    }
+  });
+
+  const accessToken = localStorage.getItem('access_token');
     const isTokenValid = (await checkToken(accessToken)).error ? false : true;
     const searchParams = new URLSearchParams(window.location.search);
 
@@ -57,30 +52,42 @@ class App extends Component {
       }
     });
   }
-}
+  }
 
   componentWillUnmount(){
     this.mounted = false;
   }
 
+  // API data for charts
+  getData = () => {
+    const {locations, events} = this.state;
+    const data = locations.map((location)=>{
+      const number = events.filter((event) => event.location === location).length
+      const city = location.split(', ').shift()
+      return {city, number};
+    })
+    return data;
+  };
+
   updateNumberOfEvents(number) { 
     this.setState({
       numberOfEvents: number,
-    })
+    });
+    this.updateEvents(this.state.selectedLocation);
   }
 
   updateEvents = (location, inputNumber) => {
-    const { selectedLocation } = this.state;
+    const { eventCount, selectedLocation } = this.state; 
     if (location) {
       getEvents().then((events) => {
         const locationEvents = (location === 'all') ?
           events :
           events.filter((event) => event.location === location);
-        const eventsToShow = locationEvents.slice(0, inputNumber);
+        const eventsToShow = locationEvents.slice(0, eventCount); 
         this.setState({
           events: eventsToShow,
           selectedLocation: location,
-          numberOfEvents: inputNumber
+          
         });
       });
     } else {
@@ -91,7 +98,7 @@ class App extends Component {
         const eventsToShow = locationEvents.slice(0, inputNumber);
         this.setState({
           events: eventsToShow,
-          numberOfEvents: inputNumber 
+          eventCount: inputNumber 
         });
       })
     }
@@ -135,7 +142,7 @@ class App extends Component {
 }
 
 
-/* removing from last line of code whilst testing locally
+/* remove from last line of code before closing div whilst testing locally
 <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
 */
 export default App;

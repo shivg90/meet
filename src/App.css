@@ -231,5 +231,6 @@ input[type="number"] {
     max-width: 50%;
     min-width: auto;
     margin: 0 auto;
+    font-size: small;
   }
 }

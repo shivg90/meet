@@ -34,14 +34,6 @@ describe("<NumberOfEvents /> component", () => {
         expect(NumberOfEventsWrapper.state('number')).toBe(12);
     });
 
-    /* // test 5: the results of the user input is rendered correctly --take out?
-    test('rendered number of events is equal to the users input', () => {
-        const RenderedNumberOfEvents = shallow(
-            <NumberOfEvents number={10} updateEvents={() => { }} /> //was updateNumberOfEvents
-        );
-        expect(RenderedNumberOfEvents.state('number')).toBe(10);
-    }); */
-
 });
 
 

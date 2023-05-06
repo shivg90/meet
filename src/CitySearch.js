@@ -40,7 +40,7 @@ class CitySearch extends Component {
       showSuggestions: false,
       infoText:'' 
     });
-    this.props.updateEvents(suggestion);
+    this.props.updateEvents(suggestion, this.props.numberOfEvents);
   }
 
   handleBlur = () => { // suggestion list disappears if user clicks away from city search box

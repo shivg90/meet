@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
+const colors = ["#ffffff", "#eddcdc", "#dbbaba", "#c99797", "#b77575"];
+
+const getData = (events) => {
+    const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'AngularJS'];
+    const data = genres.map((genre) => {
+        const value = events.filter(({ summary }) =>
+            summary.split(' ').includes(genre)
+            ).length;
+            return { name: genre, value };
+        });
+        return data;
+};
+
 const EventGenre = ({ events }) => {
     const [data, setData] = useState([]);
-    const colors = ["#ffffff", "#eddcdc", "#dbbaba", "#c99797", "#b77575"];
-
-    useEffect(() => {
-        setData(() => getData());
-    }, [events]);
-
     
-    const getData = () => {
-        const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'AngularJS'];
-        const data = genres.map((genre) => {
-            const value = events.filter(({ summary }) =>
-                summary.split(' ').includes(genre)
-                ).length;
-                return { name: genre, value };
-            });
-            return data;
-        };
+    useEffect(() => {
+        setData(() => getData(events));
+    }, [events]);
 
     return (
         <ResponsiveContainer height={400} >
